@@ -1,16 +1,20 @@
 define [
+  'chaplin'
   'views/base/view'
-  'text!templates/hello-world.hbs'
+  'text!templates/room.hbs'
+  'models/room'
 ], (
+  Chaplin
   View
   template
+  Room
 ) ->
   'use strict'
 
-  class HelloWorldView extends View
+  class RoomView extends View
     # Automatically render after initialize.
     autoRender: true
-    className: 'hello-world'
+    className: 'room'
 
     # Save the template string in a prototype property.
     # This is overwritten with the compiled template function.

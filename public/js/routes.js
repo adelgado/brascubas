@@ -2,6 +2,7 @@
 define(function() {
   'use strict';
   return function(match) {
-    return match('', 'hello#show');
+    match('', 'index#show');
+    return match('room/:id', 'room#show');
   };
 });
