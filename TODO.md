@@ -3,4 +3,6 @@ Todo
 
 - Fix Gruntfile
 - Write nice readme
-- Add client-side application
+- Implement SSL
+- Investigate encryption schemes
+- Measure different ways to transmit video data (ASCII representation might be enough?)

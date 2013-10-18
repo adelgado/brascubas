@@ -21,6 +21,25 @@ define(['chaplin', 'views/base/view', 'text!templates/room.hbs', 'models/room'],
 
     template = null;
 
+    RoomView.prototype.getTemplateData = function() {
+      debugger;
+      return camera.init({
+        targetCanvas: $('#local-camera'),
+        onFrame: function(canvas) {
+          debugger;
+        },
+        onSuccess: function() {
+          return console.log('success');
+        },
+        onError: function(error) {
+          return console.log(error);
+        },
+        onNotSupported: function() {
+          return console.log('not supo');
+        }
+      });
+    };
+
     return RoomView;
 
   })(View);

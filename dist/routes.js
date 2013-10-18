@@ -4,12 +4,15 @@
     app.all('/', function(req, res) {
       return res.render('index');
     });
-    return app.post('/room', function(req, res) {
+    app.post('/room', function(req, res) {
       var id;
       id = Math.floor(Math.random() * 1000);
       return res.json(201, {
         id: id
       });
+    });
+    return app.get('/room/:id', function(req, res) {
+      return res.send(200);
     });
   };
 
