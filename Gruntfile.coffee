@@ -1,9 +1,6 @@
 module.exports = (grunt) ->
 
-  # Project configuration.
   grunt.initConfig
-    pkg: grunt.file.readJSON('package.json')
-
     copy:
       build:
         cwd: 'source'
@@ -36,11 +33,6 @@ module.exports = (grunt) ->
         src: ['**/*.css']
         dest: ['build']
 
-    cssmin:
-      build:
-        files:
-          'build/styles.css': ['build/**/*.css']
-
     coffee:
       build:
         expand: true
@@ -60,17 +52,17 @@ module.exports = (grunt) ->
         files: [ 'source/**', '!source/**/*.styl', '!source/**/*.coffee' ]
         tasks: [ 'copy' ]
 
-  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-autoprefixer'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'stylesheets',
-    'Compiles the stylesheets'
-    ['stylus', 'autoprefixer']
+  grunt.registerTask 'stylesheets', [
+    'stylus'
+    'autoprefixer'
+  ]
 
   grunt.registerTask 'build', [
     'clean'
