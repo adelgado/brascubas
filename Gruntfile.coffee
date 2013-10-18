@@ -1,9 +1,80 @@
 module.exports = (grunt) ->
-	pkg: grunt.file.readJSON 'package.json'
 
-	uglify:
-	    options:
-			banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-		build:
-			src: 'src/<%= pkg.name %>.js'
-			dest: 'build/<%= pkg.name %>.min.js'
+  # Project configuration.
+  grunt.initConfig
+    pkg: grunt.file.readJSON('package.json')
+
+    copy:
+      build:
+        cwd: 'source'
+        src: [ '**', '!**/*.styl', '!**/*.coffee' ]
+        dest: 'build'
+        expand: true
+
+    clean:
+      build:
+        src: ['build']
+
+    stylus:
+      build:
+        option:
+          linenos: true
+          compress: false
+
+        files: [
+          expand: true
+          cwd: 'source'
+          src: [ '**/*.styl']
+          dest: 'build'
+          ext: '.css'
+        ]
+
+    autoprefixer:
+      build:
+        expand: true
+        cwd: 'build'
+        src: ['**/*.css']
+        dest: ['build']
+
+    cssmin:
+      build:
+        files:
+          'build/styles.css': ['build/**/*.css']
+
+    coffee:
+      build:
+        expand: true
+        cwd: 'source'
+        src: ['**/*.coffee']
+        dest: 'build'
+        ext: '.js'
+
+    watch:
+      stylesheets:
+        files: 'source/**/*.styl'
+        tasks: ['stylesheets']
+      scripts:
+        files: 'source/**/*.coffee'
+        tasks: ['coffee']
+      copy:
+        files: [ 'source/**', '!source/**/*.styl', '!source/**/*.coffee' ]
+        tasks: [ 'copy' ]
+
+  grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
+  grunt.loadNpmTasks 'grunt-autoprefixer'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+
+  grunt.registerTask 'stylesheets',
+    'Compiles the stylesheets'
+    ['stylus', 'autoprefixer']
+
+  grunt.registerTask 'build', [
+    'clean'
+    'copy'
+    'stylesheets'
+    'coffee'
+  ]
