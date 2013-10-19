@@ -10,7 +10,6 @@
     "express": "3.4.0",
     "stylus": "*",
     "connect-assets": "*",
-    "hogan-expresss": "*"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.3",
