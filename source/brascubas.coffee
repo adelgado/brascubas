@@ -7,7 +7,6 @@ app = express()
 app.use express.static path.join __dirname, 'public'
 app.use express.static path.join __dirname, 'views'
 
-
 app.all '/', (req, res) ->
   res.sendfile '/views/index.html'
 
@@ -19,5 +18,5 @@ app.post '/room', (req, res) ->
 app.get '/room/:id', (req, res) ->
 	res.send(200)
 
-app.listen 8080, ->
-  console.log "Listening on 8080"
+app.listen 3000, ->
+  console.log "Listening on 3000"

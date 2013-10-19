@@ -1,7 +1,10 @@
 define [
   'views/base/view'
   'text!templates/site.hbs'
-], (View, template) ->
+], (
+  View
+  template
+) ->
   'use strict'
 
   class SiteView extends View
