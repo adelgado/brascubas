@@ -1,21 +1,23 @@
-express  = require 'express'
-stylus   = require 'stylus'
+path    = require 'path'
+express = require 'express'
+stylus  = require 'stylus'
 
 app = express()
 
-app.use express.static(process.cwd() + '/public')
-app.use express.cookieParser()
-app.use express.session(
-  secret: 'shhh'
-  store: new express.session.MemoryStore
-) 
+app.use express.static path.join __dirname, 'public'
+app.use express.static path.join __dirname, 'views'
 
-app.set 'view engine', 'html'    # use .html extension for templates
-app.enable 'view cache'
-app.engine 'html', require('hogan-express')
 
-routes = require './routes'
-routes(app)
+app.all '/', (req, res) ->
+  res.sendfile '/views/index.html'
+
+app.post '/room', (req, res) ->
+	id = Math.floor(Math.random() * 1000)
+
+	res.json(201, id: id)
+
+app.get '/room/:id', (req, res) ->
+	res.send(200)
 
 app.listen 8080, ->
   console.log "Listening on 8080"
