@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node build/brascubas"
   },
+  "main": "build/brascubas.js",
   "dependencies": {
     "express": "3.4.0",
     "stylus": "*",
@@ -22,6 +23,8 @@
     "grunt-contrib-stylus": "~0.8.0",
     "grunt-autoprefixer": "~0.3.1",
     "grunt-contrib-cssmin": "~0.6.2",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-nodemon": "~0.1.1",
+    "grunt-concurrent": "~0.4.1"
   }
 }
