@@ -1,6 +1,8 @@
 define [
   'chaplin'
-], (Chaplin) ->
+], (
+	Chaplin
+) ->
   'use strict'
 
   # The application object.
