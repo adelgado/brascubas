@@ -34,34 +34,20 @@ define [
     attach: ->
       super
 
-      setTimeout cam.video ($video) ->
-        if $video?
-          console.log 'its alive'
-          $('#local-camera-container').appendChild $video
-        else
-          console.log 'houston, we have a problem'
-      , 1000
+      `navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-    #   if @hasGetUserMedia()
-    #     console.log 'good to go'
+      var constraints = {video: true};
 
-    #     permissions =
-    #       video: true
-    #       audio: true
+      function successCallback(localMediaStream) {
+        window.stream = localMediaStream; // stream available to console
+        var video = document.querySelector("video");
+        video.src = window.URL.createObjectURL(localMediaStream);
+        video.play();
+      }
 
-    #     @getUserMedia permissions, @onPermissionGranted, @onPermissionDenied
-    #   else
-    #     alert 'getUserMedia() is not supported in your browser'
+      function errorCallback(error){
+        console.log("navigator.getUse Media error: ", error);
+      }
 
-    # onPermissionGranted: (localMediaStream) ->
-    #   video = $('video') #document.querySelector('video')
-    #   video.src = window.URL.createObjectURL(localMediaStream)
-
-    #   # Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-    #   # See crbug.com/110938.
-    #   video.onloadedmetadata = (e) ->
-    #     console.log " Ready to go. Do some stuff."
-
-    # onPermissionDenied: (e) ->
-    #   console.log('Reeeejected!', e)
-
+      navigator.getUserMedia(constraints, successCallback, errorCallback);`
+  
