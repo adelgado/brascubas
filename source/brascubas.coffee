@@ -8,7 +8,7 @@ app.use express.static path.join __dirname, 'public'
 app.use express.static path.join __dirname, 'views'
 
 app.all '/', (req, res) ->
-  res.sendfile '/views/index.html'
+  res.sendfile 'views/index.html'
 
 app.post '/room', (req, res) ->
 	id = Math.floor(Math.random() * 1000)

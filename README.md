@@ -1,6 +1,7 @@
 Todo
 ====
 
+- Fix default Grunt task
 - Implement text
 - Implement SSL
 - Investigate encryption schemes
