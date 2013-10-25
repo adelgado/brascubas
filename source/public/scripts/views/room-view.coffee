@@ -12,7 +12,8 @@ define [
   'use strict'
 
   class RoomView extends View
-    # Automatically render after initialize.
+    PEER_KEY: 'e5gaw8eew1ocrf6r'
+
     autoRender: true
     className: 'room'
 
