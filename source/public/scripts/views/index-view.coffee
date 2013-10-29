@@ -12,9 +12,11 @@ define [
   'use strict'
 
   class IndexView extends View
-    # Automatically render after initialize.
+    PEER_KEY: 'e5gaw8eew1ocrf6r'
+
     autoRender: true
-    className: 'index'
+    
+    className: 'room'
 
     # Save the template string in a prototype property.
     # This is overwritten with the compiled template function.
@@ -23,10 +25,35 @@ define [
     template = null
 
     events:
-      'click button' : 'handleButtonClick'
+      'click #connect' : 'connect'
+      'click #send'    : 'send'
+     
+    attach: ->
+      super
 
-    handleButtonClick: ->
-      room = new Room
-      room.save {}, success: (room, response) ->
-        Chaplin.helpers.redirectTo 'room#show', id: room.get('id')
+      @initPeer()
 
+    initPeer: ->
+      @peer = new Peer key: @PEER_KEY
+
+      @peer.on 'open', (id) ->
+        console.log "Peer open with id #{id}"
+
+      @peer.on 'connection', (conn) ->
+        conn.on 'data', (data, a, v, s, d, g) ->
+          debugger
+          console.log(data);
+
+    connect: ->
+      peerId = prompt('What peer would you like to connect to?')
+
+      conn = @peer.connect peerId
+
+      conn.on 'open', =>
+        @connection = conn
+
+    send: ->
+      return console.log 'No connection!' unless @connection?
+
+      message = @$('#client').val()
+      @connection.send message

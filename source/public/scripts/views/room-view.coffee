@@ -12,7 +12,8 @@ define [
   'use strict'
 
   class RoomView extends View
-    # Automatically render after initialize.
+    PEER_KEY: 'e5gaw8eew1ocrf6r'
+
     autoRender: true
     className: 'room'
 
@@ -22,32 +23,25 @@ define [
     template: template
     template = null
 
-    hasGetUserMedia: ->
-      # Note: Opera is unprefixed.
-      return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia || navigator.msGetUserMedia)
-
-    getUserMedia: ->
-      navigator.getUserMedia || navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia || navigator.msGetUserMedia
-      
+    events:
+      'click #connect' : 'connect'
+     
     attach: ->
       super
 
-      `navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      @peer = new Peer key: @PEER_KEY
 
-      var constraints = {video: true};
+      @peer.on 'open', (id) ->
+        console.log "My peer ID is: #{id}"
 
-      function successCallback(localMediaStream) {
-        window.stream = localMediaStream; // stream available to console
-        var video = document.querySelector("video");
-        video.src = window.URL.createObjectURL(localMediaStream);
-        video.play();
-      }
+      @peer.on 'connection', (conn) ->
+        conn.on 'data', (data) ->
+          console.log(data);
 
-      function errorCallback(error){
-        console.log("navigator.getUse Media error: ", error);
-      }
+    connect: ->
+      peerId = prompt('What peer would you like to connect to?')
 
-      navigator.getUserMedia(constraints, successCallback, errorCallback);`
-  
+      conn = @peer.connect peerId
+
+      conn.on 'open', ->
+        conn.send 'hi!'
