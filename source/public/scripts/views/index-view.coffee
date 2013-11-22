@@ -27,7 +27,13 @@ define [
     events:
       'click #connect' : 'connect'
       'click #send'    : 'send'
-     
+
+    render: ->
+      super
+
+      @$conversation = @$('.conversation')
+      @$conversation.fadeOut()
+
     attach: ->
       super
 
@@ -40,11 +46,13 @@ define [
         console.log "Peer open with id #{id}"
 
       @peer.on 'connection', (conn) ->
-        conn.on 'data', (data, a, v, s, d, g) ->
-          debugger
-          console.log(data);
+        conn.on 'data', (data, a) ->
+          console.log a
+          console.log(data)
 
     connect: ->
+      @$conversation.fadeIn 'slow'
+
       peerId = prompt('What peer would you like to connect to?')
 
       conn = @peer.connect peerId
