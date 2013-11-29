@@ -16,13 +16,28 @@ controllers['/room'] = function (request, response)
 	response:finish('/room')
 end
 
-return function(self, request, response)
+controllers[404] = function (request, response)
+	fs.readFile('views/404.html', function(error, data)
+		if error then
+			controllers[500](request, response, data)
+		else
+			response:writeHead(404, {["Content-Type"] = "text/html"})
+			response:finish(data)
+		end
+	end)
+end
+
+controllers[500] = function (request, response, error)
+	response:writeHead(500, {["Content-Type"] = "text/html"})
+	response:finish(data)
+end
+
+return function (self, request, response)
 	if type(controllers[request.url]) == 'function' then
 		controllers[request.url](request, response)
 		print('Dispatching to controller for route ', request.url)
 	else
-		response:writeHead(404)
-		response:finish()
+		controllers[404](request, response)
 	end
 
 	-- print'self'
