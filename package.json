@@ -3,13 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node build/brascubas"
+    "start": "luanode build/brascubas.lua"
   },
-  "main": "build/brascubas.js",
+  "main": "build/brascubas.lua",
   "dependencies": {
-    "express": "3.4.0",
-    "stylus": "*",
-    "connect-assets": "*"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.3",
