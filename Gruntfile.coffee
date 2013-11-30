@@ -52,22 +52,12 @@ module.exports = (grunt) ->
         files: [ 'source/**', '!source/**/*.styl', '!source/**/*.coffee' ]
         tasks: [ 'copy' ]
 
-    nodemon:
-      dev: {}
-
-    concurrent:
-        dev: ['nodemon', 'watch']
-        options:
-          logConcurrentOutput: true
-
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-autoprefixer'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-nodemon'
-  grunt.loadNpmTasks 'grunt-concurrent'
 
   grunt.registerTask 'stylesheets', [
     'stylus'
@@ -81,4 +71,4 @@ module.exports = (grunt) ->
     'coffee'
   ]
 
-  grunt.registerTask 'default', ['concurrent:dev']
+  grunt.registerTask 'default', ['build', 'watch']
