@@ -37,6 +37,7 @@ routes['static'] = function (req, res)
 
 	if filename:match('[%a%d/\._\-]+') then
 		fs.readFile(filename, function (error, data)
+			print(filename)
 			if error then
 				return routes[404](req, res, data)
 			else
@@ -51,12 +52,18 @@ routes['static'] = function (req, res)
 end
 
 return function (self, req, res)
+	print(req.method, req.url)
+
 	if type(routes[req.url]) == 'function' then
-		routes[req.url](req, res)
-		print('Dispatching to controller for route ', req.url)
+		print('Dispatching controller action', req.url)
+		routes[req.url](req, res, routes)
 	elseif req.url:match('^/public') then
+		print('Dispatching static file action', req.url)
 		routes['static'](req, res)
 	else
+		print('Dispatching 404', req.url)
 		routes[404](req, res)
 	end
 end
+
+
