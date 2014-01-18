@@ -4,11 +4,18 @@ routes = {}
 
 routes['/'] = function (req, res)
 	fs.readFile('views/index.html', function(error, data)
+		print(data)
 		if not error then
 			res:writeHead(200, {["Content-Type"] = "text/html"})
 			res:finish(data)
+		else
+			routes[404](req, res)
 		end
 	end)
+end
+
+routes['/test'] = function (req, res)
+	res:finish('hello')
 end
 
 routes['/room'] = function (req, res)

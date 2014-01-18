@@ -17,3 +17,8 @@ Ideas
 
 - somehow manage to have guaranteed-delivery-or-failure
 - security arround MITM attacks
+
+Features
+=========
+
+1. Connect and start a textual conversation via WebRTC

@@ -3,14 +3,14 @@ module.exports = (grunt) ->
   grunt.initConfig
     copy:
       build:
-        cwd: 'source'
+        # cwd: 'source'
         src: [ '**', '!**/*.styl', '!**/*.coffee' ]
-        dest: 'build'
+        # dest: 'build'
         expand: true
 
     clean:
       build:
-        src: ['build']
+        src: ['*.css', '*.js']
 
     stylus:
       build:
@@ -65,8 +65,8 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'build', [
-    'clean'
-    'copy'
+    # 'clean'
+    # 'copy'
     'stylesheets'
     'coffee'
   ]
