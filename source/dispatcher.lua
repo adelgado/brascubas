@@ -14,15 +14,6 @@ routes['/'] = function (req, res)
 	end)
 end
 
-routes['/test'] = function (req, res)
-	res:finish('hello')
-end
-
-routes['/room'] = function (req, res)
-	res:writeHead(200, {["Content-Type"] = "text/plain"})
-	res:finish('/room')
-end
-
 routes[404] = function (req, res)
 	fs.readFile('views/404.html', function(error, data)
 		if error then
