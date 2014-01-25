@@ -11,11 +11,13 @@
 	<link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap-theme.css">
 </head>
 <body>
-	<h1>
-		Welcome to Brascubas
-	</h1>
-
-	<input id="client"/>
+	<div id="setup">
+		<ul>
+			<li><input id="peer-id" /></li>
+			<li><input id="client" /></li>
+			<li><button id="connect" /></li>
+		</ul>
+	</div>
 
 	<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 	<script src="public/bower_components/jquery/jquery.js"></script>
