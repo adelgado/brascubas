@@ -1,3 +1,9 @@
+Hacking
+=======
+
+- Compile LuaNode from source (latest github version) and install
+- npm, grunt, bower
+
 Todo
 ====
 
