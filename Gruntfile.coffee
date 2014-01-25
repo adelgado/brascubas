@@ -3,35 +3,35 @@ module.exports = (grunt) ->
   grunt.initConfig
     copy:
       build:
-        # cwd: 'source'
+        cwd: 'source'
         src: [ '**', '!**/*.styl', '!**/*.coffee' ]
-        # dest: 'build'
+        dest: 'build'
         expand: true
 
     clean:
       build:
         src: ['*.css', '*.js']
 
-    stylus:
-      build:
-        option:
-          linenos: true
-          compress: false
+    # stylus:
+    #   build:
+    #     option:
+    #       linenos: true
+    #       compress: false
 
-        files: [
-          expand: true
-          cwd: 'source'
-          src: [ '**/*.styl']
-          dest: 'build'
-          ext: '.css'
-        ]
+    #     files: [
+    #       expand: true
+    #       cwd: 'source'
+    #       src: [ '**/*.styl']
+    #       dest: 'build'
+    #       ext: '.css'
+    #     ]
 
-    autoprefixer:
-      build:
-        expand: true
-        cwd: 'build'
-        src: ['**/*.css']
-        dest: ['build']
+    # autoprefixer:
+    #   build:
+    #     expand: true
+    #     cwd: 'build'
+    #     src: ['**/*.css']
+    #     dest: ['build']
 
     coffee:
       build:
@@ -42,9 +42,9 @@ module.exports = (grunt) ->
         ext: '.js'
 
     watch:
-      stylesheets:
-        files: 'source/**/*.styl'
-        tasks: ['stylesheets']
+      # stylesheets:
+      #   files: 'source/**/*.styl'
+      #   tasks: ['stylesheets']
       scripts:
         files: 'source/**/*.coffee'
         tasks: ['coffee']
@@ -54,20 +54,20 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-stylus'
-  grunt.loadNpmTasks 'grunt-autoprefixer'
+  # grunt.loadNpmTasks 'grunt-contrib-stylus'
+  # grunt.loadNpmTasks 'grunt-autoprefixer'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'stylesheets', [
-    'stylus'
-    'autoprefixer'
-  ]
+  # grunt.registerTask 'stylesheets', [
+  #   'stylus'
+  #   'autoprefixer'
+  # ]
 
   grunt.registerTask 'build', [
-    # 'clean'
-    # 'copy'
-    'stylesheets'
+    'clean'
+    'copy'
+    # 'stylesheets'
     'coffee'
   ]
 
