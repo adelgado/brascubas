@@ -14,6 +14,7 @@ end
 
 routes = {}
 
+-- Index route
 routes['/'] = function (req, res)
 	fs.readFile('views/index.html', function(error, data)
 		if not error then
@@ -25,6 +26,7 @@ routes['/'] = function (req, res)
 	end)
 end
 
+-- Not found
 routes[404] = function (req, res)
 	fs.readFile('views/404.html', function(error, data)
 		if error then
@@ -36,6 +38,7 @@ routes[404] = function (req, res)
 	end)
 end
 
+-- Server error
 routes[500] = function (req, res, data)
 	res:writeHead(500, {["Content-Type"] = "text/html"})
 	res:finish(data)
@@ -62,8 +65,6 @@ routes['static'] = function (req, res)
 		routes[404](req, res, data)
 	end
 end
-
-
 
 return function (self, req, res)
 	print(req.method, req.url)
