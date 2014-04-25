@@ -6,7 +6,7 @@ $ ->
 
 	peer = new Peer PEER_ID, key: PEER_KEY
 
-	$('#peer-id').val PEER_ID
+	$('#peer-id').text PEER_ID
 
 	$('#connect').on 'click', ->
 		conn = peer.connect $('#client').val()
