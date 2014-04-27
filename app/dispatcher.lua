@@ -1,7 +1,7 @@
 local fs = require'luanode.fs'
 
 local function guesscontenttype(filename)
-	extensions = { 
+	extensions = {
 		['css']  = 'text/css'        ,
 		['js']   = 'text/javascript' ,
 		['html'] = 'text/html'       ,
@@ -12,16 +12,21 @@ local function guesscontenttype(filename)
 	return extensions[extension] or 'text/plain'
 end
 
+local function logerror(error)
+	print('Error: ' .. tostring(error))
+end
+
 routes = {}
 
 -- Index route
 routes['/'] = function (req, res)
 	fs.readFile('views/index.html', function(error, data)
-		if not error then
+		if error then
+			logerror(error)
+			routes[404](req, res)
+		else
 			res:writeHead(200, {["Content-Type"] = "text/html"})
 			res:finish(data)
-		else
-			routes[404](req, res)
 		end
 	end)
 end
@@ -30,6 +35,7 @@ end
 routes[404] = function (req, res)
 	fs.readFile('views/404.html', function(error, data)
 		if error then
+			logerror(error)
 			routes[500](req, res, data)
 		else
 			res:writeHead(404, {["Content-Type"] = "text/html"})
@@ -51,6 +57,7 @@ routes['static'] = function (req, res)
 		fs.readFile(filename, function (error, data)
 			print(filename)
 			if error then
+				logerror(error)
 				return routes[404](req, res, data)
 			else
 				print('Serving static file', filename)
