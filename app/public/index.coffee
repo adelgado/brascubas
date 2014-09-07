@@ -1,19 +1,27 @@
-$ ->
-	PEER_KEY = 'e5gaw8eew1ocrf6r'
-	PEER_ID  = Math.random().toString(36).substr(2, 5)
+PEER_KEY = 'e5gaw8eew1ocrf6r'
+PEER_ID  = Math.random().toString(36).substr(2, 5)
 
-	console.log PEER_ID
+$peerIdHeader  = document.querySelector 'h1'
+$connectButton = document.querySelector 'button'
+$clientInput   = document.querySelector 'input'
+$output        = document.querySelector 'textarea'
 
-	peer = new Peer PEER_ID, key: PEER_KEY
+peer = new Peer PEER_ID, key: PEER_KEY
 
-	$('#peer-id').text PEER_ID
+$peerIdHeader.textContent = "Peer ID: #{PEER_ID}"
 
-	$('#connect').on 'click', ->
-		conn = peer.connect $('#client').val()
+$connectButton.addEventListener 'click', ->
+	conn = peer.connect $clientInput.value
 
-		conn.on 'open', ->
-			conn.send 'hi!'
+	$output.value += 'Creating connection\n'
 
-		peer.on 'connection', (conn) ->
-			conn.on 'data', (data) ->
-			    console.log data
+	conn.on 'open', ->
+		$output.value += 'Connection open\n'
+
+		conn.send 'hi!'
+
+	peer.on 'connection', (conn) ->
+		$output.value += 'Connection connected\n'
+
+		conn.on 'data', (data) ->
+			$output.value += "Connection received data: #{data}\n"
