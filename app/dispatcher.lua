@@ -50,9 +50,7 @@ routes['static'] = function (req, res)
 			else
 				print('Serving static file', filename)
 				contenttype = guesscontenttype(filename)
-				res:writeHead(200, {
-					["Content-Type"] = contenttype
-				})
+				res:writeHead(200, { ["Content-Type"] = contenttype })
 				return res:finish(data)
 			end
 		end)
