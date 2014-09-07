@@ -1,13 +1,28 @@
-#setup {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 100%;
-	text-align: center;
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	margin: 0;
 }
 
-textarea {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
+	header {
+		padding: 25px;
+	}
+
+	.content {
+		display: flex;
+		flex: 1;
+	}
+
+		.conversation {
+			width: 100%;
+		}
+
+	footer {
+		margin: 25px;
+	}
+
+		.status {
+			width: 100%;
+			text-align: center;
+		}
