@@ -1,20 +1,8 @@
-local fs = require'luanode.fs'
+local fs    = require'luanode.fs'
+local utils = require'./utils'
 
-local function guesscontenttype(filename)
-	extensions = {
-		['css']  = 'text/css'        ,
-		['js']   = 'text/javascript' ,
-		['html'] = 'text/html'       ,
-	}
-
-	extension = filename:match('\.(%a+)$')
-
-	return extensions[extension] or 'text/plain'
-end
-
-local function logerror(error)
-	print('Error: ' .. tostring(error))
-end
+local guesscontenttype = utils.guesscontenttype
+local logerror         = utils.logerror
 
 routes = {}
 
