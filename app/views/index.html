@@ -14,11 +14,16 @@
 		Your ID is <span class="local-id"></span>
 
 		<input class="partner-id" />
-		<button>Connect</button>
+		<button data-action="connect">Connect</button>
 	</header>
 
 	<div class="content">
-		<input class="conversation"></input>
+		<div class="conversation"></div>
+
+		<div class="compose">
+			<input class="message" />
+			<button data-action="send-message">Send</button>
+		</div>
 	</div>
 
 	<footer>
