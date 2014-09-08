@@ -5,22 +5,29 @@ body {
 	margin: 0;
 }
 
-	header {
+	header,
+	footer,
+	.content {
 		padding: 25px;
 	}
 
 	.content {
-		display: flex;
 		flex: 1;
+		position: relative;
 	}
 
-		.conversation {
+		.compose {
 			width: 100%;
 		}
 
-	footer {
-		margin: 25px;
-	}
+			.message,
+			.compose button {
+				height: 50px;
+			}
+
+			.compose button {
+				width: 100px;
+			}
 
 		.status {
 			width: 100%;
